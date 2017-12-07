@@ -13,6 +13,15 @@ namespace ClientLogin {
     public partial class Login {
         
         /// <summary>
+        /// UpdatePanel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        
+        /// <summary>
         /// txtusername control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace ClientLogin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqpassword;
         
         /// <summary>
+        /// chkargee control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkargee;
+        
+        /// <summary>
         /// btnlogin control.
         /// </summary>
         /// <remarks>
@@ -74,6 +92,15 @@ namespace ClientLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divloginerror;
+        
+        /// <summary>
+        /// UpdateProgress1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
         
         /// <summary>
         /// gridview1 control.
@@ -193,15 +220,6 @@ namespace ClientLogin {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator regtxtregpassword;
         
         /// <summary>
-        /// chkregargee control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkregargee;
-        
-        /// <summary>
         /// btnRegisterAccount control.
         /// </summary>
         /// <remarks>
@@ -227,5 +245,23 @@ namespace ClientLogin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divusernameunavailable;
+        
+        /// <summary>
+        /// divpasswordstrength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divpasswordstrength;
+        
+        /// <summary>
+        /// lblpasswordstrength control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblpasswordstrength;
     }
 }

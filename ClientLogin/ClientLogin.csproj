@@ -87,14 +87,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ClientLogin.mdf" />
-    <Content Include="App_Data\ClientLogin_log.ldf">
-      <DependentUpon>ClientLogin.mdf</DependentUpon>
-    </Content>
+    <Content Include="EmailFormats\AccountCreated.html" />
     <Content Include="Home.aspx" />
+    <Content Include="Images\Loading.gif" />
     <Content Include="packages.config" />
     <Content Include="Register.aspx" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -163,7 +163,9 @@
     <Compile Include="Services\SendEmailService.cs" />
     <Compile Include="Services\SQLHelper.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

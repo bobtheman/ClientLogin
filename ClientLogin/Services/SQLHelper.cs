@@ -109,15 +109,7 @@ namespace ClientLogin.SQLHelper
                 }
             }
         }
-        //public void ExecuteStoredProcedure(string procedureName)
-        //{
-        //    // Gets all rows in the table into a List
-        //    string cmdText = procedureName;
-        //    SqlCommand sqlCmd = new SqlCommand(cmdText);
-        //    sqlCmd.CommandType = CommandType.StoredProcedure;
 
-        //    return ExecuteListReader<SQL_Fields>(sqlCmd);
-        //}
         public static void AddSqlParameter(SqlCommand sqlCmd, string paramId, object paramValue,
             SqlDbType sqlDbType, ParameterDirection paramDirection)
         {

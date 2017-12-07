@@ -1,10 +1,10 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
-
 
 namespace ClientLogin.PassowrdChecker
 {
-    public class PasswordCheck
+    public static class PasswordCheck
     {
         public enum PasswordScore
         {
@@ -15,7 +15,7 @@ namespace ClientLogin.PassowrdChecker
             Strong = 4,
             VeryStrong = 5
         }
-        public class PasswordAdvisor
+        public static class PasswordAdvisor
         {
             public static PasswordScore CheckStrength(string password)
             {
@@ -40,7 +40,51 @@ namespace ClientLogin.PassowrdChecker
 
                 return (PasswordScore)score;
             }
+
         }
 
+        public static class PasswordValidate
+        {
+            public static int ValidatePassword(string password)
+            {
+                if (string.IsNullOrWhiteSpace(password))
+                {
+                    return 0;
+                }
+
+                var hasNumber = new Regex(@"[0-9]+");
+                var hasUpperChar = new Regex(@"[A-Z]+");
+                var hasMiniMaxChars = new Regex(@".{8,10}");
+                var hasLowerChar = new Regex(@"[a-z]+");
+                var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
+                if (!hasLowerChar.IsMatch(password))
+                {
+                    return 1;
+                }
+
+                if (!hasUpperChar.IsMatch(password))
+                {
+                    return 2;
+                }
+
+                if (!hasMiniMaxChars.IsMatch(password))
+                {
+                    return 3;
+                }
+
+                if (!hasNumber.IsMatch(password))
+                {
+                    return 4;
+                }
+
+                if (!hasSymbols.IsMatch(password))
+                {
+                    return 5;
+                }
+
+                return 6;
+            }
+        }
     }
 }

@@ -6,12 +6,18 @@ namespace ClientLogin
 {
     public partial class Login : Page
     {
-
         protected void Page_Load(object sender, EventArgs e)
         {
             Page.ClientScript.RegisterOnSubmitStatement(this.GetType(), "val", "validateAndHighlight();");
             divloginerror.Visible = false;
             divusernameunavailable.Visible = false;
+            divpasswordstrength.Visible = false;
+            if (IsPostBack)
+            {
+                string Password = txtpassword.Text;
+                txtpassword.Attributes.Add("value", Password);
+            }
+
         }
         protected void btnlogin_Click(object sender, EventArgs e)
         {
@@ -34,31 +40,41 @@ namespace ClientLogin
 
         protected void btnRegisterAccount_Click(object sender, EventArgs e)
         {
-            PassowrdCheck(txtregpassword.Text.Trim());
-            ////var RegClientID = txtregClientID.Text.Trim();
-            //var RegUsername = txtregusername.Text.Trim();
-            //var RegPassword = txtregpassword.Text.Trim();
+            
+            int AddedUser = PassowrdCheck(txtregpassword.Text.Trim());
 
-            //int AddedUser = SQLHelper.SQLHelper.User_List_Register_NewAccount(RegUsername, RegPassword);
+            if (AddedUser < 6)
+            {
+                PasswordStrength(AddedUser);
+            }
 
-            //if (AddedUser == 1)
-            //{
-            //    Response.Redirect("~/Home.aspx");
-            //    return;
-            //}
-            //if (AddedUser == 2)
-            //{
-            //    divusernameunavailable.Visible = true;
-            //    return;
-            //}
-
-            //lblerrormessage.Text = "An error has occured, please try again";
-            //ModalPopupError.Show();
-
+            if (AddedUser >= 6)
+            {
+                CreateAccount();
+            }
         }
+
+        public void CreateAccount()
+        {
+            int AddedUser = SQLHelper.SQLHelper.User_List_Register_NewAccount(txtregusername.Text.Trim(), txtregpassword.Text.Trim());
+
+            if (AddedUser == 1)
+            {
+                string Username = txtregusername.Text.Trim();
+                Session.Add("VaildUser", SQLHelper.SQLHelper.GetUserDetailsByUserName(Username, txtregpassword.Text.Trim()));
+                var message = "Your account has been created";
+                SendEmailService.SendEmailService.SendEmail(Username, txtregusername.Text.Trim(), message, Username);
+                Response.Redirect("~/Home.aspx");
+                //return;
+            }
+            divusernameunavailable.Visible = true;
+        }
+
         public int PassowrdCheck(string password)
         {
-            return (int)PasswordCheck.PasswordAdvisor.CheckStrength(password);
+            //return (int)PasswordCheck.PasswordAdvisor.CheckStrength(password);
+
+            return PasswordCheck.PasswordValidate.ValidatePassword(password);
         }
 
         protected void btnCancelRegister_Click(object sender, EventArgs e)
@@ -73,9 +89,47 @@ namespace ClientLogin
             ModalPopupRegister.Hide();
         }
 
-        protected void chkregargee_CheckedChanged(object sender, EventArgs e)
+        protected void PasswordStrength(int strenghtindicator)
         {
+            if (strenghtindicator == 1)
+            {
+                lblpasswordstrength.Text = "Password should contain At least one lower case letter";
+                divpasswordstrength.Visible = true;
+            }
 
+            if (strenghtindicator == 2)
+            {
+                lblpasswordstrength.Text = "Password should contain At least one upper case letter";
+                divpasswordstrength.Visible = true;
+            }
+
+            if (strenghtindicator == 3)
+            {
+                lblpasswordstrength.Text = "Password should not be less than or greater than 10 characters";
+                divpasswordstrength.Visible = true;
+            }
+
+            if (strenghtindicator == 4)
+            {
+                lblpasswordstrength.Text = "Password should contain At least one numeric value";
+                divpasswordstrength.Visible = true;
+            }
+
+            if (strenghtindicator == 5)
+            {
+                lblpasswordstrength.Text = "Password should contain At least one special case characters";
+                divpasswordstrength.Visible = true;
+            }
+        }
+
+        protected void chkargee_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkargee.Checked)
+            {
+                btnlogin.Enabled = true;
+                return;
+            }
+            btnlogin.Enabled = false;
         }
     }
 }
